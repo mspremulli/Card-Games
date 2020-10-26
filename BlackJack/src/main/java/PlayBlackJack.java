@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class PlayBlackJack {
   private static ArrayList<BlackJackPlayer> players = new ArrayList<>();
   private static BlackJackPlayer dealer = new BlackJackPlayer("Dealer",0);
-  private static Deck deck = new Deck();
+  private static BlackjackDeck deck = new BlackjackDeck();
 
   private static void addPlayer() {
     players.add(new BlackJackPlayer(players.size() + 1));
@@ -19,9 +19,7 @@ public class PlayBlackJack {
   private static void deal(){
     dealer.getCards(deck.drawRandomCard(), deck.drawRandomCard());
 
-    players.forEach(player -> {
-      player.getCards(deck.drawRandomCard(), deck.drawRandomCard());
-    });
+    players.forEach(player -> player.getCards(deck.drawRandomCard(), deck.drawRandomCard()));
   }
 
   private static void display(){
@@ -45,10 +43,10 @@ public class PlayBlackJack {
   }
 
   private static void Test(){
-    Deck deck = new Deck();
+    BlackjackDeck deck = new BlackjackDeck();
     for (int i = 0; i < 52; i++) {
 
-      Card card1 = deck.drawRandomCard();
+      BlackjackCard card1 = deck.drawRandomCard();
       System.out.println(card1.getNumber()+ " " + card1.getSuit());
     }
   }
