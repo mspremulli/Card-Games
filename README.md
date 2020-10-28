@@ -1,1 +1,1 @@
-# BlackjackCard-Games
+# BlackJack.BlackjackCard-Games

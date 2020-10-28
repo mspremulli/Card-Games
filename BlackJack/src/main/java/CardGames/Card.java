@@ -1,9 +1,9 @@
 package CardGames;
 
 public class Card {
-    private int number; //1-13 11=J, 12=Q, 13=K, 1=A
-    private int value;
-    private int suit; //1 clubs 2 diamonds, 3 hearts, 4 spades
+    protected int number; //1-13 11=J, 12=Q, 13=K, 1=A
+    protected int value;
+    protected int suit; //1 clubs 2 diamonds, 3 hearts, 4 spades
     public boolean isFaceUp;
 
     public Card(int number, int suit) {

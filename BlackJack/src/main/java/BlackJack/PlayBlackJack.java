@@ -1,9 +1,14 @@
+package BlackJack;
+
+import CardGames.Card;
+import CardGames.Deck;
+
 import java.util.ArrayList;
 
 public class PlayBlackJack {
   private static ArrayList<BlackJackPlayer> players = new ArrayList<>();
   private static BlackJackPlayer dealer = new BlackJackPlayer("Dealer",0);
-  private static BlackjackDeck deck = new BlackjackDeck();
+  private static Deck deck = new Deck();
 
   private static void addPlayer() {
     players.add(new BlackJackPlayer(players.size() + 1));
@@ -22,12 +27,12 @@ public class PlayBlackJack {
     players.forEach(player -> player.getCards(deck.drawRandomCard(), deck.drawRandomCard()));
   }
 
-  private static void display(){
+  private static void display() {
     System.out.print(dealer.getName() + "  ");
     System.out.print(dealer.getFaceDownCard().displayCard() + "  ");
     System.out.println(dealer.getFaceUpCard().displayCard());
 
-    players.forEach(player ->{
+    players.forEach(player -> {
       System.out.print(player.getName() + "  ");
       System.out.print(player.getFaceDownCard().displayCard() + "  ");
       System.out.println(player.getFaceUpCard().displayCard());
@@ -43,10 +48,10 @@ public class PlayBlackJack {
   }
 
   private static void Test(){
-    BlackjackDeck deck = new BlackjackDeck();
+    Deck deck = new Deck();
     for (int i = 0; i < 52; i++) {
 
-      BlackjackCard card1 = deck.drawRandomCard();
+      Card card1 = deck.drawRandomCard();
       System.out.println(card1.getNumber()+ " " + card1.getSuit());
     }
   }
