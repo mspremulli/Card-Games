@@ -2,7 +2,7 @@ package CardGames;
 
 import java.util.ArrayList;
 
-public class Deck {
+public abstract class Deck {
     protected ArrayList<Card> deck;
 
     //default constructor
@@ -25,7 +25,7 @@ public class Deck {
     }
 
     public ArrayList<Card> shuffle (ArrayList<Card> cardsToShuffle){
-        cardsToShuffle.forEach(card -> deck.add(card));
+        deck.addAll(cardsToShuffle);
         return deck;
     }
 }

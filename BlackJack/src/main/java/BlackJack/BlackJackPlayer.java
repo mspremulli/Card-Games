@@ -1,8 +1,10 @@
 package BlackJack;
 
+import CardGames.Card;
+
 public class BlackJackPlayer {
-  private BlackjackCard faceUpCard;
-  private BlackjackCard faceDownCard;
+  private Card faceUpCard;
+  private Card faceDownCard;
   private String name;
   private int playerNumber;
 
@@ -24,17 +26,17 @@ public class BlackJackPlayer {
     return name;
   }
 
-  public void getCards(BlackjackCard downCard, BlackjackCard upCard){
+  public void getCards(Card downCard, Card upCard){
     faceDownCard = downCard;
     faceUpCard = upCard;
     upCard.isFaceUp = true;
   }
 
-  public BlackjackCard getFaceUpCard() {
+  public Card getFaceUpCard() {
     return faceUpCard;
   }
 
-  public BlackjackCard getFaceDownCard() {
+  public Card getFaceDownCard() {
     return faceDownCard;
   }
 

@@ -1,14 +1,13 @@
 package BlackJack;
 
 import CardGames.Card;
-import CardGames.Deck;
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PlayBlackJack {
   private static ArrayList<BlackJackPlayer> players = new ArrayList<>();
   private static BlackJackPlayer dealer = new BlackJackPlayer("Dealer",0);
-  private static Deck deck = new Deck();
+  private static BlackJackDeck deck = new BlackJackDeck();
 
   private static void addPlayer() {
     players.add(new BlackJackPlayer(players.size() + 1));
@@ -34,7 +33,7 @@ public class PlayBlackJack {
 
     players.forEach(player -> {
       System.out.print(player.getName() + "  ");
-      System.out.print(player.getFaceDownCard().displayCard() + "  ");
+//      System.out.print(player.getFaceDownCard().displayCard() + "  ");
       System.out.println(player.getFaceUpCard().displayCard());
     });
   }
@@ -45,10 +44,17 @@ public class PlayBlackJack {
     createPlayers();
     deal();
     display();
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Hit or stay? ");
+    String response = scanner.nextLine();
+    if(response.equals("h")){
+      players.get(0).getFaceDownCard();
+    }
+
   }
 
   private static void Test(){
-    Deck deck = new Deck();
+    BlackJackDeck deck = new BlackJackDeck();
     for (int i = 0; i < 52; i++) {
 
       Card card1 = deck.drawRandomCard();
