@@ -4,6 +4,7 @@ import CardGames.Card;
 import CardGames.Player;
 
 public class BlackJackPlayer extends Player {
+  private boolean hasAce;
 
   public BlackJackPlayer(String name, int playerNumber) {
     super(name, playerNumber);
@@ -17,8 +18,17 @@ public class BlackJackPlayer extends Player {
   public void addCard(Card card){
     hand.add(card);
     if(card.value > 10) card.value = 10;
-    if(card.value == 1) card.value = 11;
+    if(card.value == 1) {
+      card.value = 11;
+      hasAce = true;
+    }
     handValue += card.value;
+
+    if(handValue > 21 && hasAce){
+      handValue -= 10;
+      hasAce = false;
+    }
+
   }
 
 }

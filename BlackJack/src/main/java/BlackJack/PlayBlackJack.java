@@ -37,7 +37,7 @@ public class PlayBlackJack {
     players.forEach(player -> {
       System.out.print(player.getName() + "  ");
       player.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
-      System.out.println();
+      System.out.println(player.getHandValue());
     });
   }
 
@@ -52,6 +52,12 @@ public class PlayBlackJack {
         display();
 
         System.out.println();
+
+        if(player.getHandValue() == 21) {
+          System.out.println("Blackjack!");
+          break;
+        }
+
         System.out.println(player.getName() + ": Hit or stay? ");
 
         String response = scanner.nextLine();
