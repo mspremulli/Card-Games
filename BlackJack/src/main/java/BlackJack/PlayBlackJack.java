@@ -19,6 +19,18 @@ public class PlayBlackJack {
     }
   }
 
+  private static void bet(){
+    Scanner scanner = new Scanner(System.in);
+    players.forEach(player -> {
+      System.out.println(player.getName() + ": Enter your bet: ");
+      player.currentBet = scanner.nextInt();
+    });
+  }
+
+  private static void updateMoney(){
+    players.forEach(player -> player.currentMoney += player.currentBet);
+  }
+
   private static void deal(){
     dealer.addCard(deck.drawRandomCard());
     dealer.addCard(deck.drawRandomCard());
@@ -32,7 +44,7 @@ public class PlayBlackJack {
   private static void display() {
     System.out.print(dealer.getName() + "  ");
     dealer.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
-    System.out.println();
+    System.out.println(dealer.getHandValue());
 
     players.forEach(player -> {
       System.out.print(player.getName() + "  ");
@@ -42,12 +54,22 @@ public class PlayBlackJack {
   }
 
   public static void main(String[] args){
-
     createPlayers();
+    bet();
     deal();
+
+    while(dealer.getHandValue() < 17){
+      dealer.addCard(deck.drawRandomCard());
+    }
+
     Scanner scanner = new Scanner(System.in);
 
     for (var player: players) {
+      if(dealer.getHandValue() > 21){
+        display();
+        System.out.println("Dealer Busts. Everyone Wins!");
+        break;
+      }
       while (true) {
         display();
 
@@ -75,6 +97,7 @@ public class PlayBlackJack {
         else break;
       }
     }
+    updateMoney();
   }
 
 }
