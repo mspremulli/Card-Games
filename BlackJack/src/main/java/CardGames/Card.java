@@ -38,6 +38,6 @@ public class Card {
             case 13 -> "K";
             default -> "" + number;
         };
-        return cardName + " " + suitName;
+        return cardName + suitName;
     }
 }

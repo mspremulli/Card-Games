@@ -21,44 +21,47 @@ public class PlayBlackJack {
   }
 
   private static void deal(){
-    dealer.getCards(deck.drawRandomCard(), deck.drawRandomCard());
+    dealer.addCard(deck.drawRandomCard());
+    dealer.addCard(deck.drawRandomCard());
 
-    players.forEach(player -> player.getCards(deck.drawRandomCard(), deck.drawRandomCard()));
+    players.forEach(player -> {
+      player.addCard(deck.drawRandomCard());
+      player.addCard(deck.drawRandomCard());
+    });
   }
 
   private static void display() {
     System.out.print(dealer.getName() + "  ");
-    System.out.print(dealer.getFaceDownCard().displayCard() + "  ");
-    System.out.println(dealer.getFaceUpCard().displayCard());
+    dealer.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
+    System.out.println();
 
     players.forEach(player -> {
       System.out.print(player.getName() + "  ");
-//      System.out.print(player.getFaceDownCard().displayCard() + "  ");
-      System.out.println(player.getFaceUpCard().displayCard());
+        player.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
+      System.out.println();
     });
   }
 
   public static void main(String[] args){
 
-//    Test();
     createPlayers();
     deal();
-    display();
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Hit or stay? ");
-    String response = scanner.nextLine();
-    if(response.equals("h")){
-      players.get(0).getFaceDownCard();
-    }
 
-  }
+    for (var player:players) {
 
-  private static void Test(){
-    BlackJackDeck deck = new BlackJackDeck();
-    for (int i = 0; i < 52; i++) {
+      while (true) {
+        display();
 
-      Card card1 = deck.drawRandomCard();
-      System.out.println(card1.getNumber()+ " " + card1.getSuit());
+        System.out.println();
+        System.out.println(player.getName() + ": Hit or stay? ");
+        String response = scanner.nextLine();
+        if (response.equals("h")) {
+         player.addCard(deck.drawRandomCard());
+        } else {
+          break;
+        }
+      }
     }
   }
 
