@@ -1,6 +1,5 @@
 package BlackJack;
 
-import CardGames.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,7 +36,7 @@ public class PlayBlackJack {
 
     players.forEach(player -> {
       System.out.print(player.getName() + "  ");
-        player.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
+      player.getHand().forEach(card -> System.out.print(card.displayCard() + " "));
       System.out.println();
     });
   }
@@ -48,19 +47,26 @@ public class PlayBlackJack {
     deal();
     Scanner scanner = new Scanner(System.in);
 
-    for (var player:players) {
-
+    for (var player: players) {
       while (true) {
         display();
 
         System.out.println();
         System.out.println(player.getName() + ": Hit or stay? ");
+
         String response = scanner.nextLine();
-        if (response.equals("h")) {
-         player.addCard(deck.drawRandomCard());
-        } else {
-          break;
+        if (response.equals("h"))  {
+          player.addCard(deck.drawRandomCard());
+          if(player.getHandValue() > 21) {
+            System.out.println("Bust!");
+            break;
+          }
+          else if(player.getHandValue() == 21) {
+            System.out.println("21!");
+            break;
+          }
         }
+        else break;
       }
     }
   }

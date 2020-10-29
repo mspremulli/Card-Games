@@ -1,36 +1,24 @@
 package BlackJack;
 
 import CardGames.Card;
+import CardGames.Player;
 
-import java.util.ArrayList;
-
-public class BlackJackPlayer {
-  private ArrayList<Card> hand;
-  private String name;
-  private int playerNumber;
+public class BlackJackPlayer extends Player {
 
   public BlackJackPlayer(String name, int playerNumber) {
-    hand = new ArrayList<>();
-    this.name = name;
-    this.playerNumber = playerNumber;
+    super(name, playerNumber);
   }
 
   public BlackJackPlayer(int playerNumber) {
-    hand = new ArrayList<>();
-    this.name = "Player" + playerNumber;
-    this.playerNumber = playerNumber;
+    super(playerNumber);
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public ArrayList<Card> getHand() {
-    return hand;
-  }
-
+  @Override
   public void addCard(Card card){
     hand.add(card);
+    if(card.value > 10) card.value = 10;
+    if(card.value == 1) card.value = 11;
+    handValue += card.value;
   }
 
 }
