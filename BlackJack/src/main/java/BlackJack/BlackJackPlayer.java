@@ -5,6 +5,8 @@ import CardGames.Player;
 
 public class BlackJackPlayer extends Player {
   private boolean hasAce;
+  public int currentMoney;
+  public int currentBet;
 
   public BlackJackPlayer(String name, int playerNumber) {
     super(name, playerNumber);

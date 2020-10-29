@@ -25,10 +25,10 @@ public class Card {
         String suitName;
         String cardName;
         suitName = switch (suit) {
-            case 1 -> "C";
-            case 2 -> "D";
-            case 3 -> "H";
-            default -> "S";
+            case 1 -> "\u2663"; //C
+            case 2 -> "\u2666"; //D
+            case 3 -> "\u2665"; //H
+            default -> "\u2660"; //S
         };
 
         cardName = switch (number) {
