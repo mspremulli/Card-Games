@@ -53,51 +53,56 @@ public class PlayBlackJack {
     });
   }
 
-  public static void main(String[] args){
-    createPlayers();
-    bet();
-    deal();
+  public static void main(String[] args) {
+    while (true) {
 
-    while(dealer.getHandValue() < 17){
-      dealer.addCard(deck.drawRandomCard());
-    }
+      createPlayers();
+      bet();
+      deal();
 
-    Scanner scanner = new Scanner(System.in);
-
-    for (var player: players) {
-      if(dealer.getHandValue() > 21){
-        display();
-        System.out.println("Dealer Busts. Everyone Wins!");
-        break;
+      while (dealer.getHandValue() < 17) {
+        dealer.addCard(deck.drawRandomCard());
       }
-      while (true) {
-        display();
 
-        System.out.println();
+      Scanner scanner = new Scanner(System.in);
 
-        if(player.getHandValue() == 21) {
-          System.out.println("Blackjack!");
+      for (var player : players) {
+        if (dealer.getHandValue() > 21) {
+          display();
+          System.out.println("Dealer Busts. Everyone Wins!");
           break;
         }
+        while (true) {
+          display();
 
-        System.out.println(player.getName() + ": Hit or stay? ");
+          System.out.println();
 
-        String response = scanner.nextLine();
-        if (response.toLowerCase().equals("h"))  {
-          player.addCard(deck.drawRandomCard());
-          if(player.getHandValue() > 21) {
-            System.out.println("Bust!");
+          if (player.getHandValue() == 21) {
+            System.out.println("Blackjack!");
             break;
           }
-          else if(player.getHandValue() == 21) {
-            System.out.println("21!");
-            break;
-          }
+
+          System.out.println(player.getName() + ": Hit or stay? ");
+
+          String response = scanner.nextLine();
+          if (response.toLowerCase().equals("h")) {
+            player.addCard(deck.drawRandomCard());
+            if (player.getHandValue() > 21) {
+              System.out.println("Bust!");
+              break;
+            } else if (player.getHandValue() == 21) {
+              System.out.println("21!");
+              break;
+            }
+          } else break;
         }
-        else break;
       }
+      updateMoney();
+      System.out.println("Play again? (y/n)");
+      Scanner scanner2 = new Scanner(System.in);
+      if(!scanner2.next().toLowerCase().equals("y")) break;
     }
-    updateMoney();
+    players.forEach(player ->  System.out.println(player.getName() + " has $" + player.currentMoney + "."));
   }
 
 }

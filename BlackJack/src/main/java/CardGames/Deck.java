@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Deck {
     protected ArrayList<Card> deck;
-    private int numberOfSuits = 4;
-    private int numberOfCardsPerSuit = 13;
+    private final int numberOfSuits = 4;
+    private final int numberOfCardsPerSuit = 13;
 
     //default constructor
     public Deck() {
