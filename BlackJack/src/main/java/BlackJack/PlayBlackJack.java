@@ -53,55 +53,60 @@ public class PlayBlackJack {
     });
   }
 
-  public static void main(String[] args) {
-    while (true) {
+  public static void playRound(){
+    while (dealer.getHandValue() < 17) {
+      dealer.addCard(deck.drawRandomCard());
+    }
 
-      createPlayers();
-      bet();
-      deal();
+    Scanner scanner = new Scanner(System.in);
 
-      while (dealer.getHandValue() < 17) {
-        dealer.addCard(deck.drawRandomCard());
+    for (var player : players) {
+      if (dealer.getHandValue() > 21) {
+        display();
+        System.out.println("Dealer Busts. Everyone Wins!");
+        break;
       }
+      while (true) {
+        display();
 
-      Scanner scanner = new Scanner(System.in);
+        System.out.println();
 
-      for (var player : players) {
-        if (dealer.getHandValue() > 21) {
-          display();
-          System.out.println("Dealer Busts. Everyone Wins!");
+        if (player.getHandValue() == 21) {
+          System.out.println("Blackjack!");
           break;
         }
-        while (true) {
-          display();
 
-          System.out.println();
+        System.out.println(player.getName() + ": Hit or stay? ");
 
-          if (player.getHandValue() == 21) {
-            System.out.println("Blackjack!");
+        String response = scanner.nextLine();
+        if (response.toLowerCase().equals("h")) {
+          player.addCard(deck.drawRandomCard());
+          if (player.getHandValue() > 21) {
+            System.out.println("Bust!");
+            break;
+          } else if (player.getHandValue() == 21) {
+            System.out.println("21!");
             break;
           }
-
-          System.out.println(player.getName() + ": Hit or stay? ");
-
-          String response = scanner.nextLine();
-          if (response.toLowerCase().equals("h")) {
-            player.addCard(deck.drawRandomCard());
-            if (player.getHandValue() > 21) {
-              System.out.println("Bust!");
-              break;
-            } else if (player.getHandValue() == 21) {
-              System.out.println("21!");
-              break;
-            }
-          } else break;
-        }
+        } else break;
       }
-      updateMoney();
-      System.out.println("Play again? (y/n)");
-      Scanner scanner2 = new Scanner(System.in);
-      if(!scanner2.next().toLowerCase().equals("y")) break;
     }
+    updateMoney();
+  }
+
+  public static void main(String[] args) {
+    createPlayers();
+    while (true) {
+      bet();
+      deal();
+      playRound();
+
+      System.out.println("Play again? (y/n)");
+      Scanner scanner = new Scanner(System.in);
+      String keepPlaying = scanner.nextLine();
+      if(!keepPlaying.equals("y")) break;
+    }
+
     players.forEach(player ->  System.out.println(player.getName() + " has $" + player.currentMoney + "."));
   }
 

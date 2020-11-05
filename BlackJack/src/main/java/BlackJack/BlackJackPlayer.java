@@ -4,7 +4,7 @@ import CardGames.Card;
 import CardGames.Player;
 
 public class BlackJackPlayer extends Player {
-  private boolean hasAce;
+  private boolean hasAcebe11;
   public int currentMoney;
   public int currentBet;
 
@@ -22,13 +22,13 @@ public class BlackJackPlayer extends Player {
     if(card.value > 10) card.value = 10;
     if(card.value == 1) {
       card.value = 11;
-      hasAce = true;
+      hasAcebe11 = true;
     }
     handValue += card.value;
 
-    if(handValue > 21 && hasAce){
+    if(handValue > 21 && hasAcebe11){
       handValue -= 10;
-      hasAce = false;
+      hasAcebe11 = false;
     }
 
   }
